@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Hours</title>
+    <style>
+        * {
+            margin-top: 0;
+            font-family: Verdana, Geneva, Tahoma, sans-serif
+        }
+
+        .heading {
+            text-align: center;
+            background-color: rgb(114, 80, 237);
+            padding: 20px;
+            padding-bottom: 10px;
+            color: #fff;
+            border-radius: 30px;
+            margin-bottom: 10px;
+        }
+
+        .heading p {
+            font-size: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+
+        }
+
+        .label-day {
+            color: blue;
+            font-weight: 700;
+            /* text-align: center; */
+        }
+
+        label input {
+            margin-left: 10px;
+        }
+
+        input[type="time"] {
+            width: 150px;
+            height: 50px;
+            font-size: 20px;
+            /* border-radius: 10px; */
+        }
+
+        button {
+            margin-top: 10px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 5px;
+            border: 1px solid black;
+        }
+
+        .row {
+            display: flex;
+            margin-bottom: 20px;
+            justify-content: space-evenly;
+            align-items: center;
+
+        }
+
+        .deficit {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 10px;
+            padding-inline: 20px;
+            border-radius: 10px;
+            border: none;
+            color: #fff;
+            background-color: green;
+        }
+
+        .btn {
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .tab {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #results {
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="heading">
+        <h1>Employee Work Hours Calculator</h1>
+        <p>Made with <span style="color: red;">❤</span> by Khalid</p>
+    </div>
+
+    <form>
+        <div class="row">
+            <div>
+                <label class="label-day">Day 1</label>
+                <label>
+                    <p>Start Time:</p><input type="time" id="day1-start">
+                </label>
+                <label>
+                    <p>End Time:</p><input type="time" id="day1-end">
+                </label>
+            </div>
+            <div>
+                <label class="label-day">Day 2</label>
+                <label>
+                    <p>Start Time:</p><input type="time" id="day2-start">
+                </label>
+                <label>
+                    <p>End Time:</p><input type="time" id="day2-end">
+                </label>
+            </div>
+            <div>
+                <label class="label-day">Day 3</label>
+                <label>
+                    <p>Start Time:</p><input type="time" id="day3-start">
+                </label>
+                <label>
+                    <p>End Time:</p><input type="time" id="day3-end">
+                </label>
+            </div>
+            <div>
+                <label class="label-day">Day 4</label>
+                <label>
+                    <p>Start Time:</p><input type="time" id="day4-start">
+                </label>
+                <label>
+                    <p>End Time:</p><input type="time" id="day4-end">
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <label class="label-day">Day 5</label>
+                <label>
+                    <p>Start Time:</p><input type="time" id="day5-start">
+                </label>
+                <label>
+                    <p>End Time:</p><input type="time" id="day5-end">
+                </label>
+            </div>
+            <div>
+                <label class="label-day">Day 6</label>
+                <label>
+                    <p>Start Time:</p><input type="time" id="day5-start">
+                </label>
+                <label>
+                    <p>End Time:</p><input type="time" id="day5-end">
+                </label>
+            </div>
+            <div>
+                <label class="label-day">Day 7</label>
+                <label>
+                    <p>Start Time:</p><input type="time" id="day5-start">
+                </label>
+                <label>
+                    <p>End Time:</p><input type="time" id="day5-end">
+                </label>
+            </div>
+        </div>
+        <div class="deficit">
+            <label>Enter the Weekly Working Hours Required<input type="number" id="hours-required"></label>
+        </div>
+        <div class="btn">
+            <button type="button" onclick="calculateHours()">Calculate Hours</button>
+        </div>
+    </form>
+    <div class="tab">
+        <div id="results"></div>
+    </div>
+
+
+</body>
+
+<script>
+    // function calculateHours() {
+    //     let totalMinutes = 0;
+    //     const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+    //     let tableData = "";
+
+    //     for (let i = 0; i < 7; i++) {
+    //         const dayStart = document.getElementById(`day${i + 1}-start`).value;
+    //         const dayEnd = document.getElementById(`day${i + 1}-end`).value;
+    //         const minutes = Math.abs(new Date(`1970-01-01T${dayStart}:00Z`) - new Date(`1970-01-01T${dayEnd}:00Z`)) / 60000;
+    //         totalMinutes += minutes;
+    //         tableData += `<tr><td>${days[i]}</td><td>${padNumber(Math.floor(minutes / 60))}:${padNumber(minutes % 60)}</td></tr>`;
+    //     }
+
+    //     const totalHours = Math.floor(totalMinutes / 60);
+    //     const remainingMinutes = padNumber(Math.round(totalMinutes % 60));
+    //     const totalHoursFormatted = `${padNumber(totalHours)}:${remainingMinutes}`;
+
+    //     document.getElementById("results").innerHTML = `<h2>Hours Worked:</h2><table><tr><th>Day</th><th>Hours Worked</th></tr>${tableData}<tr><th>Total</th><th>${totalHoursFormatted}</th></tr></table>`;
+    // }
+
+    function calculateHours() {
+        let totalMinutes = 0;
+        const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        let tableData = "";
+
+        for (var i = 0; i < 7; i++) {
+            const dayStart = document.getElementById(`day${i + 1}-start`)?.value || "00:00";
+            const dayEnd = document.getElementById(`day${i + 1}-end`)?.value || "00:00";
+            const minutes = Math.abs(new Date(`1970-01-01T${dayStart}:00Z`) - new Date(`1970-01-01T${dayEnd}:00Z`)) / 60000;
+            totalMinutes += minutes;
+            tableData += `<tr><td>${days[i]}</td><td>${padNumber(Math.floor(minutes / 60))}:${padNumber(minutes % 60)}</td></tr>`;
+        }
+
+        const dayStart = document.getElementById(`day${i + 1}-start`);
+        const dayEnd = document.getElementById(`day${i + 1}-end`);
+
+
+
+        const totalHours = Math.floor(totalMinutes / 60);
+        const remainingMinutes = padNumber(Math.round(totalMinutes % 60));
+        const totalHoursFormatted = `${padNumber(totalHours)}:${remainingMinutes}`;
+
+        // Get the number of hours required
+        const hoursRequired = document.getElementById("hours-required")?.value || "00:00";
+
+        // Calculate the number of hours worked
+        const hoursWorked = (totalMinutes / 60).toFixed(2);
+
+        // Calculate the deficit
+        const deficit = (hoursRequired - hoursWorked).toFixed(2);
+
+        // Add the deficit row to the table
+        tableData += `<tr><td>Hours Required</td><td>${hoursRequired}</td></tr>`;
+
+        // Update the result div to show the hours worked and the deficit
+        document.getElementById("results").innerHTML = `<h2>Hours Worked:</h2><table><tr><th>Day</th><th>Hours Worked</th></tr>${tableData}<tr><th>Total</th><th>${totalHoursFormatted}</th></tr><tr><td>Deficit</td><td>${deficit}</td></tr></table>`; //<p>Deficit: ${deficit}</p>
+    }
+
+
+    function padNumber(num) {
+        return String(num).padStart(2, "0");
+    }
+
+</script>
+
+</html>
